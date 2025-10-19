@@ -1,6 +1,7 @@
 package dev.cigana.teste_dws.controllers;
 
 import dev.cigana.teste_dws.domain.band.Band;
+import dev.cigana.teste_dws.domain.enums.SortBands;
 import dev.cigana.teste_dws.services.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,9 @@ public class BandController {
     private BandService bandService;
 
     @GetMapping()
-    public ResponseEntity<List<Band>> findAllBands(@RequestParam(required = false) String name){
-        return ResponseEntity.ok(bandService.getBands(name));
+    public ResponseEntity<List<Band>> findAllBands(@RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) SortBands sort){
+        return ResponseEntity.ok(bandService.getBands(name, sort));
     }
 
     @GetMapping("/{id}")
